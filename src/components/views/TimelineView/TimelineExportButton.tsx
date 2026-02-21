@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Download, FileText, Image as ImageIcon, X, CalendarRange, CheckCircle2 } from "lucide-react";
 import { useAppStore } from "@/store";
