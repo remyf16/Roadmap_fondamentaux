@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-produit: #3b82f6;
+  --color-contenu: #8b5cf6;
+  --color-sprint-1: #bbf7d0;
+  --color-sprint-2: #86efac;
+  --color-sprint-3: #4ade80;
+  --color-sprint-4: #22c55e;
+  --color-sprint-5: #16a34a;
+  --color-sprint-6: #15803d;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
