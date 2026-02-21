@@ -372,14 +372,15 @@ export function TaskDetailPanel() {
                 type="task"
                 onConfirm={() =>
                   store.createTask({
-                    title: "Nouvelle tâche",
-                    status: "todo",
-                    startDate: today,
-                    endDate: today,
-                    teamId: store.teams[0]?.id || "",
-                    // progress retiré (si ton modèle le requiert encore, laisse 0 ici)
-                    roles: [],
-                    description: "",
+                        title: "Nouvelle tâche",
+                        status: "todo",
+                        startDate: today,
+                        endDate: today,
+                        teamId: store.teams[0]?.id || "",
+                        roles: [],
+                        description: "",
+                        progress: 0,
+                        order: store.tasks.length,
                   })
                 }
               />
@@ -393,6 +394,7 @@ export function TaskDetailPanel() {
                 store.createMilestone({
                   name: "Nouveau jalon",
                   date: today,
+                  sprintId: store.sprints?.[0]?.id || "",
                 })
               }
             />
