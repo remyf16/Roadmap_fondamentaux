@@ -1,5 +1,5 @@
 // src/components/views/TimelineView/TimelineExportRenderer.tsx
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import type { Team, Sprint, Milestone, TaskStep } from "@/types/models";
 import type { GroupedRow } from "@/hooks/useGroupedTasks";
 import {
