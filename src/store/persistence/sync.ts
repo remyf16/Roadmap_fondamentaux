@@ -3,19 +3,18 @@ import { useAppStore, type AppStore } from "@/store";
 import { stateRepository } from "@/lib/repository/state.repository";
 import type { AppData } from "@/types/models";
 
-// Incrémente si tu changes le schéma (utile pour futures migrations)
 const APP_DATA_VERSION = 1;
 
-// sélectionne uniquement les données (pas les actions)
+// sélectionne uniquement les données persistées
 function selectPersistedState(s: AppStore): AppData {
   return {
+    version: APP_DATA_VERSION,
     tasks: s.tasks,
     teams: s.teams,
     sprints: s.sprints,
     dependencies: s.dependencies,
     milestones: s.milestones,
     topics: s.topics,
-    version: APP_DATA_VERSION,
   };
 }
 
@@ -25,24 +24,15 @@ export async function hydrateStore() {
   const data = await stateRepository.load();
   if (!data) return;
 
-  // sécurise les anciens états sans "version"
-  const safe = {
-    ...(data as Partial<AppData>),
-    version:
-      typeof (data as Partial<AppData>)?.version === "number"
-        ? (data as Partial<AppData>).version!
-        : APP_DATA_VERSION,
-  } as AppData;
-
+  // hydrate uniquement les clés persistées
   useAppStore.setState((current) => ({
     ...current,
-    // on ne merge que les champs persistés
-    tasks: safe.tasks ?? current.tasks,
-    teams: safe.teams ?? current.teams,
-    sprints: safe.sprints ?? current.sprints,
-    dependencies: safe.dependencies ?? current.dependencies,
-    milestones: safe.milestones ?? current.milestones,
-    topics: safe.topics ?? current.topics,
+    tasks: data.tasks ?? current.tasks,
+    teams: data.teams ?? current.teams,
+    sprints: data.sprints ?? current.sprints,
+    dependencies: data.dependencies ?? current.dependencies,
+    milestones: data.milestones ?? current.milestones,
+    topics: data.topics ?? current.topics,
   }));
 }
 

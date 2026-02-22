@@ -1,8 +1,7 @@
 // src/lib/storage.ts
-import type { AppData } from "@/types/models";
 import type { IDataRepository } from "./repository/types";
-import { LocalStorageRepository } from "./repository/localStorage.repository";
+import { MongoRepository } from "./repository/mongo.repository";
 
-export function createRepository(): IDataRepository<AppData> {
-  return new LocalStorageRepository();
+export function createRepository(): IDataRepository {
+  return new MongoRepository();
 }
