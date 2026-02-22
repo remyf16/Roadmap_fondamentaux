@@ -17,7 +17,8 @@
     "release:minor": "commit-and-tag-version --release-as minor",
     "release:major": "commit-and-tag-version --release-as major",
     "release:patch": "commit-and-tag-version --release-as patch",
-    "release:dry": "commit-and-tag-version --dry-run"
+    "release:dry": "commit-and-tag-version --dry-run",
+    "start": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -71,13 +72,4 @@
     "vite": "^7.3.1",
     "vitest": "^4.0.18"
   }
-
-  {
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "start": "node server/index.js"
-  }
 }
-
