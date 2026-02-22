@@ -1,9 +1,10 @@
+// src/lib/repository/localStorage.repository.ts
+import type { AppData } from "@/types/models";
+import type { IDataRepository } from "./types";
+
 const STORAGE_KEY = "roadmap-app-data";
 
-// Type générique (à resserrer plus tard quand tu auras un vrai AppData exporté)
-type AppData = Record<string, unknown>;
-
-export class LocalStorageRepository {
+export class LocalStorageRepository implements IDataRepository<AppData> {
   async load(): Promise<AppData | null> {
     if (typeof window === "undefined") return null;
 
