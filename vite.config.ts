@@ -11,6 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  // ✅ AJOUTE CE BLOC
+  preview: {
+    host: true, // équivalent à --host 0.0.0.0
+    allowedHosts: ["roadmap-fondamentaux.onrender.com"],
+  },
+
   test: {
     globals: true,
     environment: "jsdom",
