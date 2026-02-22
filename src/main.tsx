@@ -3,15 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-import { hydrateFromApi, startAutosaveToApi } from "@/store/persistence/sync";
+import { hydrateStore, startAutosave } from "@/store/persistence/sync";
 
 async function bootstrap() {
   try {
-    await hydrateFromApi();
+    await hydrateStore();
   } catch (e) {
-    console.error("Hydration failed", e);
+    console.error("Hydrate failed", e);
   } finally {
-    startAutosaveToApi();
+    startAutosave();
   }
 }
 

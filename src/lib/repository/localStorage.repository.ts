@@ -1,30 +1,23 @@
-// src/lib/repository/localStorage.repository.ts
+import type { AppData } from "@/types/appData"; // adapte si besoin
+
 const STORAGE_KEY = "roadmap-app-data";
 
 export class LocalStorageRepository {
-  load<T = unknown>(): T | null {
+  async load(): Promise<AppData | null> {
+    if (typeof window === "undefined") return null;
+
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      return JSON.parse(raw) as T;
+      return JSON.parse(raw) as AppData;
     } catch {
       return null;
     }
   }
 
-  save<T = unknown>(data: T): void {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch {
-      // ignore
-    }
-  }
-
-  clear(): void {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
+  async save(data: AppData): Promise<void> {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
 }
